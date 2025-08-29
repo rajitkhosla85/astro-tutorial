@@ -1,16 +1,11 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+import { TEST_URL } from "astro:env/server";
+const pageTitle = "coming form index.astro";
+console.log("testurl", TEST_URL);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro Jai Mata Di</h1>
-	</body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+  <h2>my awsome subtitile</h2>
+</BaseLayout>

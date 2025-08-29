@@ -1,0 +1,29 @@
+---
+const links = [
+  {
+    text: "Home",
+    link: "/",
+  },
+  {
+    text: "About",
+    link: "/about/",
+  },
+  {
+    text: "Blogs",
+    link: "/blogs/",
+  },
+  {
+    text: "Tags",
+    link: "/tags/",
+  },
+];
+---
+
+<div class="nav-links">
+  {links.map((link) => <a href={link.link}>{link.text}</a>)}
+</div>
+<style>
+  a {
+    padding-right: 4px;
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+type Identity = {
+  firstName: string;
+  country: string;
+  occupation: string;
+  hobbies: Array<string>;
+};
+const pageTitle = "My Page Title";
+const identity: Identity = {
+  firstName: "Rajit Khosla",
+  country: "Sweden",
+  occupation: "Developer",
+  hobbies: ["Tennis", "Book Reading"],
+};
+const skills = ["Java", "JS", "React", "AWS"];
+const showMessage = Math.random() > 0.5 ? true : false;
+const skillColor = "green";
+const fontWeight = "bold";
+const textCase = "uppercase";
+---
+
+<head>
+  <style is:global define:vars={{ skillColor, fontWeight, textCase }}>
+    h1 {
+      color: purple;
+      font-size: 4rem;
+    }
+    .skill {
+      color: var(--skillColor);
+      font-weight: var(--fontWeight);
+      text-transform: var(--textCase);
+    }
+  </style>
+</head>
+<BaseLayout pageTitle={pageTitle}>
+  <p>My name is {identity.firstName}</p>
+  <p>I am living in {identity.country}</p>
+  <p>I am working as {identity.occupation}</p>
+  <p>My hobbies are {identity.hobbies}</p>
+  <p>
+    My Skiils are
+    <ul>{skills.map((skill) => <li class="skill">{skill}</li>)}</ul>
+  </p>
+  {showMessage && <p>Yes Message can be shown</p>}
+</BaseLayout>

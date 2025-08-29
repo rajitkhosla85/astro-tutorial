@@ -1,0 +1,17 @@
+---
+import BlogPost from "../components/BlogPost.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+const blogTitle = "Jai Mata Di from variable";
+const blogs = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true })
+) as any as [{ url: string; frontmatter: { title: string } }];
+---
+
+<BaseLayout pageTitle={blogTitle}>
+  {
+    blogs.map((blog) => (
+      <BlogPost url={blog.url} title={blog.frontmatter.title} />
+    ))
+  }
+</BaseLayout>

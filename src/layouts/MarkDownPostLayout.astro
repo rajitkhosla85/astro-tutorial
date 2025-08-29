@@ -1,0 +1,40 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  frontmatter: {
+    title: string;
+    author: string;
+    pubDate: string;
+    tags: Array<string>;
+    description?: string;
+    image: {
+      alt: string;
+      url: string;
+    };
+  };
+}
+const { frontmatter } = Astro.props;
+const pubDate = new Date(frontmatter.pubDate);
+---
+
+<BaseLayout title={frontmatter.title}>
+  <p>
+    Published on: {pubDate.getDate()}-{pubDate.getMonth()}-{
+      pubDate.getFullYear()
+    }
+  </p>
+  <p>Written by {frontmatter.author}</p>
+  {frontmatter.description && <p>{frontmatter.description}</p>}
+  <img src={frontmatter.image.url} alt={frontmatter.image.alt} />
+  <ul>
+    {
+      frontmatter.tags.map((tag) => (
+        <li>
+          <a href={"../tags/" + tag}>{tag}</a>
+        </li>
+      ))
+    }
+  </ul>
+  <slot />
+</BaseLayout>

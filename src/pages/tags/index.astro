@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const pageTitle = "Tags Page";
+
+const allPosts = Object.values(
+  import.meta.glob("../posts/*.md", { eager: true })
+) as any as Array<{
+  url: string;
+  frontmatter: { tags: Array<string>; title: string };
+}>;
+//get tags
+const uniqueTags: Array<string> = [];
+
+allPosts.forEach((post) =>
+  post.frontmatter.tags.forEach((tag) => {
+    if (!uniqueTags.includes(tag)) {
+      uniqueTags.push(tag);
+    }
+  })
+);
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <div class="tags">
+    {
+      uniqueTags.map((tag) => (
+        <ul>
+          <a class="tag" href={`/tags/${tag}`}>
+            {tag}
+          </a>
+        </ul>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  <style > a {
+    color: #00539f;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    margin: 0.25em;
+    border: dotted 1px #a1a1a1;
+    border-radius: 0.5em;
+    padding: 0.5em 1em;
+    font-size: 1.15em;
+    background-color: #f8fcfd;
+  }
+</style>
